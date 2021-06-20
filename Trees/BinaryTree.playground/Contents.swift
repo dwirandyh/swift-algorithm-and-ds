@@ -20,10 +20,23 @@ class BinaryNode<Element> {
 
 extension BinaryNode {
 
+    func traversePostOrder(visit: (Element) -> Void) {
+        leftChild?.traversePostOrder(visit: visit)
+        rightChild?.traversePostOrder(visit: visit)
+        visit(value)
+    }
+
     func traverseInOder(visit: (Element) -> Void) {
         leftChild?.traverseInOder(visit: visit)
         visit(value)
         rightChild?.traverseInOder(visit: visit)
+    }
+
+    func preOrderTraversal(visit: (Element) -> Void) {
+        visit(value)
+        leftChild?.preOrderTraversal(visit: visit)
+        rightChild?.preOrderTraversal(visit: visit)
+
     }
 
 }
@@ -45,6 +58,14 @@ nine.rightChild = three
 two.leftChild = four
 two.rightChild = six
 
-ten.traverseInOder {
+ten.traverseInOder { _ in
+//    print($0)
+}
+
+ten.traversePostOrder { _ in
+//    print($0)
+}
+
+ten.preOrderTraversal {
     print($0)
 }
